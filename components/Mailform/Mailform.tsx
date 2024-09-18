@@ -1,15 +1,26 @@
-'use Client'
+'use client'
 import React from 'react'
-import { FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
+import { useForm } from 'react-hook-form'
 
 const Mailform = () => {
+  const form = useForm()
+
+  function onSubmit(values: any) {
+    console.log(values)
+  }
   return (
-    <Form>
-      <form onSubmit={() => {}} className="space-y-8">
+    <Form {...form}>
+      <form
+        onSubmit={() => {
+          form.handleSubmit(onSubmit)
+        }}
+        className="container"
+      >
         <FormField
-          //   control={form.control}
+          control={form.control}
           name="username"
           render={({ field }) => (
             <FormItem>
