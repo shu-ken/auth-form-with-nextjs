@@ -24,12 +24,7 @@ const Mailform = () => {
   }
   return (
     <Form {...form}>
-      <form
-        onSubmit={() => {
-          form.handleSubmit(onSubmit)
-        }}
-        className="container"
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="container">
         <FormField
           control={form.control}
           name="username"
