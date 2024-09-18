@@ -1,4 +1,4 @@
-import Mailform from '@/components/ui/Mailform/Mailform'
+import Mailform from '@/components/Mailform/Mailform'
 // import { Button } from '@/components/ui/button'
 // import { Input } from '@/components/ui/input'
 import Image from 'next/image'
