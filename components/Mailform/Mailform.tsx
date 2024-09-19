@@ -7,21 +7,10 @@ import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { formSchema } from '@/lib/formSchema'
 import { Textarea } from '../ui/textarea'
+import { useMailForm } from '@/hooks/useMailForm'
 
 const Mailform = () => {
-  const form = useForm({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      username: '',
-      subject: '',
-      email: '',
-      content: '',
-    },
-  })
-
-  function onSubmit(values: any) {
-    console.log(values)
-  }
+  const { form, onSubmit } = useMailForm()
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="container">
