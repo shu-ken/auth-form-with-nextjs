@@ -63,6 +63,20 @@ const Mailform = () => {
             </FormItem>
           )}
         />
+
+        <FormField
+          control={form.control}
+          name="file"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>添付画像</FormLabel>
+              <FormControl>
+                <Input accept="image/" type="file" placeholder="主題" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <Button type="submit">Submit</Button>
       </form>
     </Form>
