@@ -15,8 +15,14 @@ export const useMailForm = () => {
   })
 
   // 関数のメモ化する。関数の再生成を抑制する。
-  const onSubmit = useCallback((values: any) => {
-    console.log(values)
+  const onSubmit = useCallback(async (values: any) => {
+    try {
+      await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/send`, {
+        method: 'post',
+      })
+    } catch (err) {
+      console.log(err)
+    }
   }, [])
   return { form, onSubmit }
 }
