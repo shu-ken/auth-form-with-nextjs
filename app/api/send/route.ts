@@ -4,13 +4,14 @@ import { Resend } from 'resend'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export async function POST() {
+export async function POST(request: Request) {
+  const { username, subject, email, content } = await request.json()
   try {
     const { data, error } = await resend.emails.send({
       from: 'Acme <onboarding@resend.dev>', //resend公式の設定値
       to: ['shu73aal@gmail.com'],
-      subject: 'next.jsのテスト',
-      react: EmailTemplate({ username: 'John', email: 'test@gmail.com', content: 'フォーム開発はこちら' }) as React.ReactElement, //これがないとエラーになるっぽい
+      subject,
+      react: EmailTemplate({ username, email, content }) as React.ReactElement, //これがないとエラーになるっぽい
     })
     // エラーハンドリング
     if (error) {
