@@ -5,9 +5,19 @@ import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { useMailForm } from '@/hooks/useMailForm'
+import { ClipLoader } from 'react-spinners'
 
 const Mailform = () => {
   const { form, onSubmit } = useMailForm()
+
+  // ダミーデータを設定する関数
+  const fillDummyData = () => {
+    form.setValue('username', 'ダミーユーザー')
+    form.setValue('email', 'dummy@example.com')
+    form.setValue('subject', 'ダミーの主題')
+    form.setValue('content', 'これはダミーの本文です。')
+  }
+
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="container">
@@ -87,7 +97,12 @@ const Mailform = () => {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        {/* ダミーデータ入力ボタン */}
+        <Button type="button" onClick={fillDummyData} disabled={form.formState.isSubmitting}>
+          ダミーデータを入力{form.formState.isSubmitting}
+        </Button>
+        {/* isSubmitting = 送信成功したかどうかの状態を監視できる */}
+        <Button type="submit">{form.formState.isSubmitting ? <ClipLoader /> : '送信'}</Button>
       </form>
     </Form>
   )
