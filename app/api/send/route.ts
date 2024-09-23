@@ -1,6 +1,7 @@
 import { EmailTemplate } from '@/components/email-template'
 import { NextResponse } from 'next/server'
 import { Resend } from 'resend'
+import { arrayBuffer } from 'stream/consumers'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -13,7 +14,11 @@ export async function POST(request: Request) {
   const content = formData.get('content') as string
   const file = formData.get('file') as File
 
-  console.log(username, subject, email, content, file)
+  // console.log(username, subject, email, content, file)
+
+  // arrayBuffer()はバイナリデータを生のバイトとして表現するためのデータ構造。
+  const buffer = Buffer.from(await file.arrayBuffer())
+  // console.log(buffer)
 
   try {
     const { data, error } = await resend.emails.send({
@@ -21,7 +26,7 @@ export async function POST(request: Request) {
       to: ['shu73aal@gmail.com'],
       subject,
       react: EmailTemplate({ username, email, content }) as React.ReactElement, //これがないとエラーになるっぽい
-      attachments: [{ filename: file.name, content: file }],
+      attachments: [{ filename: file.name, content: buffer }],
     })
     // エラーハンドリング
     if (error) {

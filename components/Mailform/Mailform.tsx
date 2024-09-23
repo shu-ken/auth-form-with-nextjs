@@ -75,6 +75,8 @@ const Mailform = () => {
                   accept="image/*"
                   type="file"
                   placeholder="主題"
+                  // ファイルの変更を認識する必要があるためonChange時のトリガーで、event.target.filesでファイルオブジェクトにアクセスする。
+                  // REACTHOOKフォームで、状態管理がされているので、useMailFormのvaluesにこの内容が入る。
                   onChange={(event) => {
                     onChange(event.target.files)
                   }}
