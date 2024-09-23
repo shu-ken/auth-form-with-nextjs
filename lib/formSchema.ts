@@ -18,7 +18,7 @@ export const formSchema = z.object({
   // 「?」はオプショナルチェーン。ファイルがない時やNULLの場合も正常にこの関数が機能する。
   file: z
     .custom<FileList>()
-    .refine((files) => files?.length !== 0, 'ファイル画像が必要です。')
+    .refine((files) => files?.length > 0, 'ファイル画像が必要です。')
     .refine((files) => files?.[0].size <= MAX_FILE_SIZE, `画像サイズは${MAX_MB}MBまでです`)
     .refine((files) => ACCEPTED_IMAGE_TYPE.includes(files?.[0]?.type), `jpeg,jpg,png,webpのファイルのみ使用できます。`),
 })
