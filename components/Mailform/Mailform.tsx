@@ -101,6 +101,7 @@ const Mailform = () => {
                   // REACTHOOKフォームで、状態管理がされているので、useMailFormのvaluesにこの内容が入る。
                   onChange={(event) => {
                     onChange(event.target.files)
+                    console.log(value)
                   }}
                   {...fieldProps}
                 />
