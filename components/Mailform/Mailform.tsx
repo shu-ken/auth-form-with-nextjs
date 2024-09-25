@@ -1,14 +1,25 @@
 'use client'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '../ui/form'
 import { Button } from '../ui/button'
 import { Input } from '../ui/input'
 import { Textarea } from '../ui/textarea'
 import { useMailForm } from '@/hooks/useMailForm'
 import { ClipLoader } from 'react-spinners'
+import { toast, ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 
 const Mailform = () => {
   const { form, onSubmit } = useMailForm()
+
+  // useEffect = reactの機能。
+  useEffect(() => {
+    if (form.formState.isSubmitSuccessful) {
+      toast.success('メールが送信されました')
+    }
+    // 下記の依存配列を空にするとページがロードされ、レンダリングされた時に必ず一回発火する。
+    // form.formState.isSubmitSuccessfulにしたので、サクセスフルの時だけ、トーストを出現させるようになる。
+  }, [form.formState.isSubmitSuccessful])
 
   // ダミーデータを設定する関数
   const fillDummyData = () => {
@@ -20,6 +31,7 @@ const Mailform = () => {
 
   return (
     <Form {...form}>
+      <ToastContainer />
       <form onSubmit={form.handleSubmit(onSubmit)} className="container">
         <FormField
           control={form.control}
