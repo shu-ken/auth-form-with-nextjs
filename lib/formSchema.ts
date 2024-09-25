@@ -1,6 +1,5 @@
 'use client'
 
-import { Files } from 'lucide-react'
 import { z } from 'zod'
 
 const MAX_MB = 5
