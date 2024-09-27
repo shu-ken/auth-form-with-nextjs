@@ -114,7 +114,7 @@ const Mailform = () => {
         <Button type="button" onClick={fillDummyData} disabled={form.formState.isSubmitting}>
           ダミーデータを入力{form.formState.isSubmitting}
         </Button>
-        {/* isSubmitting = 送信成功したかどうかの状態を監視できる */}
+        {/* isSubmitting = 送信成功したかどうかの状態を監視できる。 */}
         <Button type="submit">{form.formState.isSubmitting ? <ClipLoader /> : '送信'}</Button>
       </form>
     </Form>
